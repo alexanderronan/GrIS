@@ -30,7 +30,16 @@ This repository contains the following paths: [Data](/Data/), [Environments](/En
 
 --------------------------------------------------------------------------------------------------
 
-[Scripts](/Scripts/) contains the following:
+[Scripts](/Scripts/) contains the following scripts:
+  1. [Level 2 Elevation Change Detection](/Scripts/elevation_change_detection.py)
+  2. [Level 2 Elevation Lowess](/Scripts/elevation_lowess.py)
+  3. [Level 2 Elevation Multiple Regression](/Scripts/elevation_multiple_regression.py)
+  4. [Level 2 LRM Elevation Aggregation](/Scripts/level_2_lrm_elevation_aggregation.py)
+  5. [Level 1B Metric Change Detection](/Scripts/metric_change_detection.py)
+  6. [Level 1B Metric Parameterization and Clustering](/Scripts/parameterization_and_clustering_metrics.py)
+
+
+
 
 
 
