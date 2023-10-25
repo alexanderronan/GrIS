@@ -53,8 +53,7 @@ This repository contains the following paths: [Data](/Data/), [Environments](/En
 
 Script #7 Plots the Level 2 OCOG & UCL-Land Ice Retracked Elevations for a given study site, as well as its Level 1B LeW over time. 
 
-Non-BEAST algorithms & the plotting algorithm require the included
-The remaining algorithms require the included 
+Non-BEAST algorithms & the plotting algorithm require the included [GIS](/Environments/The remaining algorithms require the included 
 
 
 
