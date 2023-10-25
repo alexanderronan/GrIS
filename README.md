@@ -7,15 +7,11 @@ This repository contains the following paths: [Data](/Data/), [Environments](/En
   1. [Correlation Analysis](/Data/Correlation_Analysis/)
   2. [Graphs](/Data/Graphs/)
   3. [Level 1B LeW](/Data/Level_1B_LeW/)
-     * [Level 1B Raw Data](/Data/Level_1B_LeW/Level_1B_Raw_Data/)
-     * [Level 1B Clustered Data](/Data/Level_1B_LeW/Level_1B_Clustered_Data/)
-     * [Level 1B BEAST Outputs](/Data/Level_1B_LeW/Level_1B_BEAST_Outputs/)
-  
-
-         
-
-     
-  8. [Level_2_Elevations](/Data/Level_2_Elevations/)
+     *[Level 1B Raw Data](/Data/Level_1B_LeW/Level_1B_Raw_Data/)
+     *[Level 1B Clustered Data](/Data/Level_1B_LeW/Level_1B_Clustered_Data/)
+     *[Level 1B BEAST Outputs](/Data/Level_1B_LeW/Level_1B_BEAST_Outputs/)
+  4. [Level_2_Elevations](/Data/Level_2_Elevations/)
+     *[ 
 
 
 
