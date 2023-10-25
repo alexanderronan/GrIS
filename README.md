@@ -37,25 +37,26 @@ This repository contains the following paths: [Data](/Data/), [Environments](/En
   4. [Level 2 LRM Elevation Aggregation](/Scripts/level_2_lrm_elevation_aggregation.py)
   5. [Level 1B Metric Change Detection](/Scripts/metric_change_detection.py)
   6. [Level 1B Metric Parameterization and Clustering](/Scripts/parameterization_and_clustering_metrics.py)
+  7. [Plotting](/Scripts/lew_elevation_plotting.py)
 
 
-[Level 1B Metric Parameterization and Clustering](/Scripts/parameterization_and_clustering_metrics.py) takes Level 1B waveform power values around a given buffer of a given study location and calculates waveform metrics (LeW, TeS, Integration), and clusters the data by calendar week. Erroneous and problematic waveforms are removed. 
+[Level 1B Metric Parameterization and Clustering](/Scripts/parameterization_and_clustering_metrics.py) takes Level 1B waveform power values around a given buffer of a given study location and calculates waveform metrics (LeW), and clusters the data by calendar week. Erroneous and problematic waveforms are removed. 
+
+[Level 1B Metric Change Detection](/Scripts/metric_change_detection.py) takes the clustered Level 1B metrics and applies the BEAST algorithm to it.
 
 [Level 2 LRM Elevation Aggregation](/Scripts/level_2_lrm_elevation_aggregation.py) takes the Level 2 elevation data for a given location and merges them into one .csv file.
 
-[Level 2 Elevation Lowess](/Scripts/elevation_lowess.py) takes Level 2 retracked elevations around a given buffer around the study site and aggregates them on a monthly basis, applying a linear regression to evaluate the elevation at the absolute study site.
+[Level 2 Elevation Multiple Regression](/Scripts/elevation_multiple_regression.py) takes Level 2 retracked elevations around a given buffer around the study site and clusters them on a monthly basis, applying a linear regression to evaluate the elevation at the absolute study site.
 
-[Level 1B Metric Change Detection](/Scripts/metric_change_detection.py) Takes the evaluated elevations from Script #3 and applies a Lowess smoothing function.
-
-[Level 2 Elevation Change Detection](/Scripts/elevation_change_detection.py) Takes the clustered Level 1B metrics and applies the BEAST algorithm to it.
+[Level 2 Elevation Lowess](/Scripts/elevation_lowess.py)  takes the evaluated elevations from Script #3 and applies a Lowess smoothing function.
 
 [Level 2 Elevation Change Detection](/Scripts/elevation_change_detection.py) Takes the evaluated Level 2 elevations and applies the BEAST algorithm to it.
 
-Script #7 Plots the Level 2 OCOG & UCL-Land Ice Retracked Elevations for a given study site, as well as its Level 1B LeW over time. 
+[Plotting](/Scripts/lew_elevation_plotting.py)  plots the Level 2 OCOG & UCL-Land Ice Retracked Elevations for a given study site, as well as its Level 1B LeW over time. 
 
-Non-BEAST algorithms & the plotting algorithm require the included [GIS](/Environments/The remaining algorithms require the included 
+Non-BEAST algorithms & the plotting algorithm require the included [GIS](/Environments/GIS_environment.yaml) environment. The remaining algorithms require the included [Change Detection](change_detection_environment.yaml)
 
-
+--------------------------------------------------------------------------------------------------
 
 
 
