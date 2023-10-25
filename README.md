@@ -1,5 +1,5 @@
 # GrIS
-Data Repository for "CryoSat-2 Parameterization Across the GrIS."
+Data Repository for "CryoSat-2 Parameterization Across the GrIS." (Ronan et al. 2023, in review)
 
 Authors:
 * Alexander C. Ronan (alexander.clark.ronan@dartmouth.edu
