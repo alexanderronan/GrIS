@@ -27,4 +27,5 @@ This repository contains the following paths: [Data](/Data/), [Environments](/En
 
 [Level 2 Elevations](/Data/Level_2_Elevations/) contains all Level 2 retracked elevation data used in the study. 1A contains the raw elevation data in a CSV file for each study location. 1B contains the clustered elevation data in a CSV file for each study location. 1C includes the smoothed profile of the clustered elevation data as CSV files. 1/8th and 1/12th refer to the aggregation period for smoothing. 1D contains the BEAST algorithm outputs for each site and multiple aggregation periods as a .pkl file. 
 
+
 --------------------------------------------------------------------------------------------------
