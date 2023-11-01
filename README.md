@@ -5,6 +5,7 @@ Authors:
 Alexander C. Ronan<sup>1</sup>, Jonathan W. Chipman<sup>1,2</sup>, Robert L. Hawley<sup>1</sup>, Erich Osterberg<sup>1</sup>
 
 1: Department of Earth Sciences, Dartmouth College, Hanover, NH 03755
+
 2: Department of Geography, Dartmouth College, Hanover, NH 03755
 
 Contact: alexander.clark.ronan@dartmouth.edu
