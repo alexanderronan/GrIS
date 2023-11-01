@@ -2,7 +2,7 @@
 Data Repository for "CryoSat-2 Parameterization Across the GrIS." (Ronan et al. 2023, in review)
 
 Authors:
-Alexander C. Ronan (<sup></sup>1), Jonathan W. Chipman, Robert L. Hawley, Erich Osterberg
+Alexander C. Ronan <sup>1</sup>, Jonathan W. Chipman, Robert L. Hawley, Erich Osterberg
 
 
 
