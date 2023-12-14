@@ -41,7 +41,7 @@ for location in location_coord:
         np.delete(datestr,1)
         
     if location == "Raven":
-        #Remove first and last value
+        #Remove last value
         TeS = TeS[:-1]
         LeW = LeW[:-1]
         Integration = Integration[:-1]
