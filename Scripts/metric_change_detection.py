@@ -33,20 +33,6 @@ for location in location_coord:
     Integration = np.array(df['Integration'])
     datestr = (df['date']).tolist()
     
-    if location == "Summit":
-        #Remove second value
-        np.delete(TeS,1)
-        np.delete(LeW,1)
-        np.delete(Integration,1)
-        np.delete(datestr,1)
-        
-    if location == "Raven":
-        #Remove last value
-        TeS = TeS[:-1]
-        LeW = LeW[:-1]
-        Integration = Integration[:-1]
-        datestr = datestr[:-1]
-    
     #set string to variable name
     myVars = vars()
     myVars["TeS"] = TeS
