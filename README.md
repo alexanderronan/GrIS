@@ -63,9 +63,9 @@ This repository contains the following paths: [Data](/Data/), [Environments](/En
 
 [Level 2 Elevation Change Detection](/Scripts/elevation_change_detection.py) Takes the evaluated Level 2 elevations and applies the BEAST algorithm to it.
 
-[Plotting](/Scripts/lew_elevation_plotting.py)  plots the Level 2 OCOG & UCL-Land Ice Retracked Elevations for a given study site, as well as its Level 1B LeW over time. 
-
 Non-BEAST algorithms & the plotting algorithm require the included [GIS](/Environments/GIS_environment.yaml) environment. The remaining algorithms require the included [Change Detection](change_detection_environment.yaml) environment.
+
+Elevation 2: UCL Land-Ice Retracker; Elevation 3: OCOG Retracker
 
 --------------------------------------------------------------------------------------------------
 
