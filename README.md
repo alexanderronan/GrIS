@@ -49,7 +49,7 @@ This repository contains the following paths: [Data](/Data/), [Environments](/En
   5. [Level 1B Metric Change Detection](/Scripts/metric_change_detection.py)
   6. [Level 1B Metric Parameterization and Clustering](/Scripts/parameterization_and_clustering_metrics.py)
   7. [Plotting](/Scripts/lew_elevation_plotting.py)
-  8. [FTP_Extraction](/Scripts/ftp_extraction.py)
+  8. [FTP_Extraction](/Scripts/ftp_server_extraction.py)
 
 
 [Level 1B Metric Parameterization and Clustering](/Scripts/parameterization_and_clustering_metrics.py) takes Level 1B waveform power values around a given buffer of a given study location and calculates waveform metrics (LeW), and clusters the data by calendar week. Erroneous and problematic waveforms are removed. 
@@ -62,7 +62,9 @@ This repository contains the following paths: [Data](/Data/), [Environments](/En
 
 [Level 2 Elevation Lowess](/Scripts/elevation_lowess.py)  takes the evaluated elevations from Script #3 and applies a Lowess smoothing function.
 
-[Level 2 Elevation Change Detection](/Scripts/elevation_change_detection.py) Takes the evaluated Level 2 elevations and applies the BEAST algorithm to it.
+[Level 2 Elevation Change Detection](/Scripts/elevation_change_detection.py) takes the evaluated Level 2 elevations and applies the BEAST algorithm to it.
+
+[FTP_Extraction](/Scripts/ftp_server_extraction.py) downloads CryoSat-2 SIRAL data that fall within a predescribed date and bounding box.
 
 Non-BEAST algorithms & the plotting algorithm require the included [GIS](/Environments/GIS_environment.yaml) environment. The remaining algorithms require the included [Change Detection](change_detection_environment.yaml) environment.
 
