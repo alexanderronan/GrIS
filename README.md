@@ -49,6 +49,7 @@ This repository contains the following paths: [Data](/Data/), [Environments](/En
   5. [Level 1B Metric Change Detection](/Scripts/metric_change_detection.py)
   6. [Level 1B Metric Parameterization and Clustering](/Scripts/parameterization_and_clustering_metrics.py)
   7. [Plotting](/Scripts/lew_elevation_plotting.py)
+  8. [FTP_Extraction](/Scripts/ftp_extraction.py)
 
 
 [Level 1B Metric Parameterization and Clustering](/Scripts/parameterization_and_clustering_metrics.py) takes Level 1B waveform power values around a given buffer of a given study location and calculates waveform metrics (LeW), and clusters the data by calendar week. Erroneous and problematic waveforms are removed. 
