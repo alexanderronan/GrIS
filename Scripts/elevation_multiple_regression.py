@@ -85,8 +85,8 @@ for location in loc_list:
     
    
     #Creating dataframe to put clustered data in.
-    df_cluster = pd.DataFrame(columns=['date','Elevation 1', 'Elevation 2', 'Elevation 3','EV1 SE', 'EV2 SE', 'EV3 SE', 'EV1 c0', 'EV1 c1','EV1 c2', 'EV1 c0 SE', 'EV1 c1 SE', 'EV1 c2 SE', 'EV2 c0', 'EV2 c1','EV2 c2','EV2 c0 SE','EV2 c1 SE', 'EV2 c2 SE','EV3 c0', 'EV3 c1','EV3 c2','EV3 c0 SE','EV3 c1 SE', 'EV3 c2 SE', 'EV1 r2', 'EV2 r2', 'EV3 r2', 'EV1 pv', 'EV2 pv', 'EV3 pv', 'Proj_x', 'Proj_y', '#Samples'])
-    
+    df_cluster = pd.DataFrame(columns=['date','EV1 Pred','EV2 Pred','EV3 Pred','EV1 Conf','EV2 Conf','EV3 Conf', 'Elevation 1', 'Elevation 2', 'Elevation 3', 'EV1 c0', 'EV1 c1','EV1 c2', 'EV1 c0 SE', 'EV1 c1 SE', 'EV1 c2 SE', 'EV2 c0', 'EV2 c1','EV2 c2','EV2 c0 SE','EV2 c1 SE', 'EV2 c2 SE','EV3 c0', 'EV3 c1','EV3 c2','EV3 c0 SE','EV3 c1 SE', 'EV3 c2 SE', 'EV1 r2', 'EV2 r2', 'EV3 r2', 'EV1 pv', 'EV2 pv', 'EV3 pv', 'Proj_x', 'Proj_y', '#Samples'])
+
     row_list = []
     second_to_date = []
     #len(df_total)
@@ -121,6 +121,18 @@ for location in loc_list:
                 C = model._results.params
                 BSE = model._results.bse
                 #evaluate elevation at specific location
+                #evaluate elevation at specific location
+                #https://stackoverflow.com/questions/17559408/confidence-and-prediction-intervals-with-statsmodels/47191929#47191929
+                #https://github.com/statsmodels/statsmodels/issues/987
+                #https://github.com/statsmodels/statsmodels/issues/4437
+                #https://scipy-lectures.org/packages/statistics/auto_examples/plot_regression_3d.html
+                #(ChatGPT, OpenAI, 2024) - I used this tool to investigate available OLS package tools for 3d regression prediction, and edited output code based on the other links/citations above to incorporate into my script. This was only utilized for the next four lines (and other occurences of those four lines throughout the script)
+                ###################################################################################
+                prediction = model.get_prediction(pd.DataFrame({'x': [x_test], 'y': [y_test]})) #same as before without z since thats the prediction!
+                predictions_summary = prediction.summary_frame(alpha=0.05)
+                predicted_mean = predictions_summary['mean'][0]
+                predicted_mean_se = predictions_summary['mean_se'][0]
+                ###################################################################################
                 elevation_calc = C[1]*x_test + C[2]*y_test + C[0] #evaluate elevation 
                 error_elevation = math.sqrt(((BSE[1]*x_test)**2) + ((BSE[2]*y_test)**2) + ((BSE[0])**2))  #calculated uncertainty of elevation
                 if (retracker == elevation_1):
@@ -130,10 +142,11 @@ for location in loc_list:
                     df_temp['EV1 c0'] = C[0]
                     df_temp['EV1 c1'] = C[1]
                     df_temp['EV1 c2'] = C[2]
-                    df_temp['EV1 SE'] = error_elevation
                     df_temp['EV1 c0 SE'] = BSE[0]
                     df_temp['EV1 c1 SE'] = BSE[1]
                     df_temp['EV1 c2 SE'] = BSE[2]
+                    df_temp['EV1 Pred'] = predicted_mean
+                    df_temp['EV1 Conf'] = predicted_mean_se * 1.96 
                 if (retracker == elevation_2):
                     df_temp['Elevation 2'] = elevation_calc
                     df_temp['EV2 r2'] = model._results.rsquared_adj
@@ -141,10 +154,11 @@ for location in loc_list:
                     df_temp['EV2 c0'] = C[0]
                     df_temp['EV2 c1'] = C[1]
                     df_temp['EV2 c2'] = C[2]
-                    df_temp['EV2 SE'] = error_elevation
                     df_temp['EV2 c0 SE'] = BSE[0]
                     df_temp['EV2 c1 SE'] = BSE[1]
                     df_temp['EV2 c2 SE'] = BSE[2]
+                    df_temp['EV2 Pred'] = predicted_mean
+                    df_temp['EV2 Conf'] = predicted_mean_se * 1.96
                 if (retracker == elevation_3):
                     df_temp['Elevation 3'] = elevation_calc
                     df_temp['EV3 r2'] = model._results.rsquared_adj
@@ -152,11 +166,12 @@ for location in loc_list:
                     df_temp['EV3 c0'] = C[0]
                     df_temp['EV3 c1'] = C[1]
                     df_temp['EV3 c2'] = C[2]
-                    df_temp['EV3 SE'] = error_elevation
                     df_temp['EV3 c0 SE'] = BSE[0]
                     df_temp['EV3 c1 SE'] = BSE[1]
                     df_temp['EV3 c2 SE'] = BSE[2]
-    
+                    df_temp['EV3 Pred'] = predicted_mean
+                    df_temp['EV3 Conf'] = predicted_mean_se * 1.96
+                    
             number_population = len(row_list)         #Calculates number of total samples that are being averaged.
             df_temp['#Samples'] = number_population        #Adding in STD values to a temporary average df which will then be appended onto the df_average.
             date = df_total.loc[row_list,'date'].mean()
@@ -186,40 +201,56 @@ for location in loc_list:
                     #evaluate elevation at specific location
                     elevation_calc = C[1]*x_test + C[2]*y_test + C[0]
                     error_elevation = math.sqrt(((BSE[1]*x_test)**2) + ((BSE[2]*y_test)**2) + ((BSE[0])**2))
+                    #evaluate elevation at specific location
+                    #https://stackoverflow.com/questions/17559408/confidence-and-prediction-intervals-with-statsmodels/47191929#47191929
+                    #https://github.com/statsmodels/statsmodels/issues/987
+                    #https://github.com/statsmodels/statsmodels/issues/4437
+                    #https://scipy-lectures.org/packages/statistics/auto_examples/plot_regression_3d.html
+                    #(ChatGPT, OpenAI, 2024) - I used this tool to investigate available OLS package tools for 3d regression prediction, and edited output code based on the other links/citations above to incorporate into my script. This was only utilized for the next four lines (and other occurences of those four lines throughout the script)
+                
+                    ###################################################################################
+                    prediction = model.get_prediction(pd.DataFrame({'x': [x_test], 'y': [y_test]})) #same as before without z since thats the prediction!
+                    predictions_summary = prediction.summary_frame(alpha=0.05)
+                    predicted_mean = predictions_summary['mean'][0]
+                    predicted_mean_se = predictions_summary['mean_se'][0]
+                    ###################################################################################
 
                     if (retracker == elevation_1):
-                        df_temp['Elevation 1'] = elevation_calc
-                        df_temp['EV1 r2'] = model._results.rsquared_adj
-                        df_temp['EV1 pv'] = model._results.f_pvalue
-                        df_temp['EV1 c0'] = C[0]
-                        df_temp['EV1 c1'] = C[1]
-                        df_temp['EV1 c2'] = C[2]
-                        df_temp['EV1 SE'] = error_elevation
-                        df_temp['EV1 c0 SE'] = BSE[0]
-                        df_temp['EV1 c1 SE'] = BSE[1]
-                        df_temp['EV1 c2 SE'] = BSE[2]
-                    if (retracker == elevation_2):
-                        df_temp['Elevation 2'] = elevation_calc
-                        df_temp['EV2 r2'] = model._results.rsquared_adj
-                        df_temp['EV2 pv'] = model._results.f_pvalue
-                        df_temp['EV2 c0'] = C[0]
-                        df_temp['EV2 c1'] = C[1]
-                        df_temp['EV2 c2'] = C[2]
-                        df_temp['EV2 SE'] = error_elevation
-                        df_temp['EV2 c0 SE'] = BSE[0]
-                        df_temp['EV2 c1 SE'] = BSE[1]
-                        df_temp['EV2 c2 SE'] = BSE[2]
-                    if (retracker == elevation_3):
-                        df_temp['Elevation 3'] = elevation_calc
-                        df_temp['EV3 r2'] = model._results.rsquared_adj
-                        df_temp['EV3 pv'] = model._results.f_pvalue
-                        df_temp['EV3 c0'] = C[0]
-                        df_temp['EV3 c1'] = C[1]
-                        df_temp['EV3 c2'] = C[2]
-                        df_temp['EV3 SE'] = error_elevation
-                        df_temp['EV3 c0 SE'] = BSE[0]
-                        df_temp['EV3 c1 SE'] = BSE[1]
-                        df_temp['EV3 c2 SE'] = BSE[2]
+                    df_temp['Elevation 1'] = elevation_calc
+                    df_temp['EV1 r2'] = model._results.rsquared_adj
+                    df_temp['EV1 pv'] = model._results.f_pvalue
+                    df_temp['EV1 c0'] = C[0]
+                    df_temp['EV1 c1'] = C[1]
+                    df_temp['EV1 c2'] = C[2]
+                    df_temp['EV1 c0 SE'] = BSE[0]
+                    df_temp['EV1 c1 SE'] = BSE[1]
+                    df_temp['EV1 c2 SE'] = BSE[2]
+                    df_temp['EV1 Pred'] = predicted_mean
+                    df_temp['EV1 Conf'] = predicted_mean_se * 1.96 
+                if (retracker == elevation_2):
+                    df_temp['Elevation 2'] = elevation_calc
+                    df_temp['EV2 r2'] = model._results.rsquared_adj
+                    df_temp['EV2 pv'] = model._results.f_pvalue
+                    df_temp['EV2 c0'] = C[0]
+                    df_temp['EV2 c1'] = C[1]
+                    df_temp['EV2 c2'] = C[2]
+                    df_temp['EV2 c0 SE'] = BSE[0]
+                    df_temp['EV2 c1 SE'] = BSE[1]
+                    df_temp['EV2 c2 SE'] = BSE[2]
+                    df_temp['EV2 Pred'] = predicted_mean
+                    df_temp['EV2 Conf'] = predicted_mean_se * 1.96
+                if (retracker == elevation_3):
+                    df_temp['Elevation 3'] = elevation_calc
+                    df_temp['EV3 r2'] = model._results.rsquared_adj
+                    df_temp['EV3 pv'] = model._results.f_pvalue
+                    df_temp['EV3 c0'] = C[0]
+                    df_temp['EV3 c1'] = C[1]
+                    df_temp['EV3 c2'] = C[2]
+                    df_temp['EV3 c0 SE'] = BSE[0]
+                    df_temp['EV3 c1 SE'] = BSE[1]
+                    df_temp['EV3 c2 SE'] = BSE[2]
+                    df_temp['EV3 Pred'] = predicted_mean
+                    df_temp['EV3 Conf'] = predicted_mean_se * 1.96
     
                 number_population = len(row_list)         #Calculates number of total samples that are being averaged.
                 df_temp['#Samples'] = number_population        #Adding in STD values to a temporary average df which will then be appended onto the df_average.
@@ -247,7 +278,19 @@ for location in loc_list:
                     #evaluate elevation at specific location
                     elevation_calc = C[1]*x_test + C[2]*y_test + C[0]
                     error_elevation = math.sqrt(((BSE[1]*x_test)**2) + ((BSE[2]*y_test)**2) + ((BSE[0])**2))
-
+                    #evaluate elevation at specific location
+                    #https://stackoverflow.com/questions/17559408/confidence-and-prediction-intervals-with-statsmodels/47191929#47191929
+                    #https://github.com/statsmodels/statsmodels/issues/987
+                    #https://github.com/statsmodels/statsmodels/issues/4437
+                    #https://scipy-lectures.org/packages/statistics/auto_examples/plot_regression_3d.html
+                    #(ChatGPT, OpenAI, 2024) - I used this tool to investigate available OLS package tools for 3d regression prediction, and edited output code based on the other links/citations above to incorporate into my script. This was only utilized for the next four lines (and other occurences of those four lines throughout the script)
+                
+                    ###################################################################################
+                    prediction = model.get_prediction(pd.DataFrame({'x': [x_test], 'y': [y_test]})) #same as before without z since thats the prediction!
+                    predictions_summary = prediction.summary_frame(alpha=0.05)
+                    predicted_mean = predictions_summary['mean'][0]
+                    predicted_mean_se = predictions_summary['mean_se'][0]
+                    ###################################################################################
                     if (retracker == elevation_1):
                         df_temp['Elevation 1'] = elevation_calc
                         df_temp['EV1 r2'] = model._results.rsquared_adj
@@ -255,10 +298,11 @@ for location in loc_list:
                         df_temp['EV1 c0'] = C[0]
                         df_temp['EV1 c1'] = C[1]
                         df_temp['EV1 c2'] = C[2]
-                        df_temp['EV1 SE'] = error_elevation
                         df_temp['EV1 c0 SE'] = BSE[0]
                         df_temp['EV1 c1 SE'] = BSE[1]
                         df_temp['EV1 c2 SE'] = BSE[2]
+                        df_temp['EV1 Pred'] = predicted_mean
+                        df_temp['EV1 Conf'] = predicted_mean_se * 1.96 
                     if (retracker == elevation_2):
                         df_temp['Elevation 2'] = elevation_calc
                         df_temp['EV2 r2'] = model._results.rsquared_adj
@@ -266,10 +310,11 @@ for location in loc_list:
                         df_temp['EV2 c0'] = C[0]
                         df_temp['EV2 c1'] = C[1]
                         df_temp['EV2 c2'] = C[2]
-                        df_temp['EV2 SE'] = error_elevation
                         df_temp['EV2 c0 SE'] = BSE[0]
                         df_temp['EV2 c1 SE'] = BSE[1]
                         df_temp['EV2 c2 SE'] = BSE[2]
+                        df_temp['EV2 Pred'] = predicted_mean
+                        df_temp['EV2 Conf'] = predicted_mean_se * 1.96
                     if (retracker == elevation_3):
                         df_temp['Elevation 3'] = elevation_calc
                         df_temp['EV3 r2'] = model._results.rsquared_adj
@@ -277,10 +322,11 @@ for location in loc_list:
                         df_temp['EV3 c0'] = C[0]
                         df_temp['EV3 c1'] = C[1]
                         df_temp['EV3 c2'] = C[2]
-                        df_temp['EV3 SE'] = error_elevation
                         df_temp['EV3 c0 SE'] = BSE[0]
                         df_temp['EV3 c1 SE'] = BSE[1]
                         df_temp['EV3 c2 SE'] = BSE[2]
+                        df_temp['EV3 Pred'] = predicted_mean
+                        df_temp['EV3 Conf'] = predicted_mean_se * 1.96
                 number_population = len(row_list)         #Calculates number of total samples that are being averaged.
                 df_temp['#Samples'] = number_population        #Adding in STD values to a temporary average df which will then be appended onto the df_average.
                 date = df_total.loc[row_list,'date'].mean()
