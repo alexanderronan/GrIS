@@ -33,7 +33,7 @@ This repository contains the following paths: [Data](/Data/), [Environments](/En
 
 [Graphs](/Data/Graphs/) Contains the relevant output graphs for each study location.
 
-[Level 1B Metrics](/Data/Level_1B_Metrics/) contains all Level 1B metrics used in the study. 2A contains the non-clustered level-1b metrics that have been calculated using python scripts for each study site. 2A contains multiple CSV for each files with different either/both erroneous waveform information and calculate metrics. 2B contains the clustered level 1B metrics derived from the non-outliers CSV file in 2A. 2C contains the BEAST algorithm outputs for each site and multiple aggregation periods as a .pkl file.
+[Level 1B Metrics](/Data/Level_1B_Metrics/) contains all Level 1B metrics used in the study. 2A contains the non-clustered level-1b metrics that have been calculated using python scripts for each study site. 2A contains multiple CSV for each files with different either/both erroneous waveform information and calculate metrics. 2B contains the clustered level 1B metrics derived from the non-outliers CSV file in 2A. 2C contains the BEAST algorithm outputs for each site and multiple aggregation periods as a .pkl file. Human date refers to month day format, vs Epoch format of seconds since 1-1-1970.
 
 [Level 2 Elevations](/Data/Level_2_Elevations/) contains all Level 2 retracked elevation data used in the study. 4A contains the raw elevation data in a CSV file for each study location. 4B contains the clustered elevation data in a CSV file for each study location. 4C includes the smoothed profile of the clustered elevation data as CSV files. 1/8th and 1/12th refer to the aggregation period for smoothing. 4D contains the BEAST algorithm outputs for each site and multiple aggregation periods as a .pkl file. 
 
@@ -47,6 +47,8 @@ This repository contains the following paths: [Data](/Data/), [Environments](/En
   4. [Level 1B Metric Change Detection](/Scripts/metric_change_detection.py)
   5. [Level 1B Metric Parameterization and Clustering](/Scripts/parameterization_and_clustering_metrics.py)
   6. [FTP Extraction](/Scripts/ftp_server_extraction.py)
+  7. [Climatology](/Scripts/Climatology_LeW.py)
+  8. [Plotting](/Scripts/LeW/Elevations_Plot_v2.py)
 
 
 [Level 1B Metric Parameterization and Clustering](/Scripts/parameterization_and_clustering_metrics.py) takes Level 1B waveform power values around a given buffer of a given study location and calculates waveform metrics (LeW), and clusters the data by calendar week. Erroneous and problematic waveforms are removed. 
@@ -58,6 +60,10 @@ This repository contains the following paths: [Data](/Data/), [Environments](/En
 [Level 2 Elevation Multiple Regression](/Scripts/elevation_multiple_regression.py) takes Level 2 retracked elevations around a given buffer around the study site and clusters them on a monthly basis, applying a linear regression to evaluate the elevation at the absolute study site.
 
 [FTP_Extraction](/Scripts/ftp_server_extraction.py) downloads CryoSat-2 SIRAL data that fall within a predescribed date and bounding box.
+
+[Climatology](/Scripts/Climatology_LeW.py) averages LeW from non-outlier waveforms (Human Date format vs Seconds since 1-1-1970) based on month.
+
+[Plotting](/Scripts/LeW/Elevations_Plot_v2.py) plots LeW, ULI elevations, and OCOG elevations.
 
 Non-BEAST algorithms & the plotting algorithm require the included [GIS](/Environments/GIS_environment.yaml) environment. The remaining algorithms require the included [Change Detection](change_detection_environment.yaml) environment.
 
