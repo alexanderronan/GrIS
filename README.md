@@ -46,8 +46,7 @@ This repository contains the following paths: [Data](/Data/), [Environments](/En
   3. [Level 2 LRM Elevation Aggregation](/Scripts/level_2_lrm_elevation_aggregation.py)
   4. [Level 1B Metric Change Detection](/Scripts/metric_change_detection.py)
   5. [Level 1B Metric Parameterization and Clustering](/Scripts/parameterization_and_clustering_metrics.py)
-  6. [Plotting](/Scripts/lew_elevation_plotting.py)
-  7. [FTP Extraction](/Scripts/ftp_server_extraction.py)
+  6. [FTP Extraction](/Scripts/ftp_server_extraction.py)
 
 
 [Level 1B Metric Parameterization and Clustering](/Scripts/parameterization_and_clustering_metrics.py) takes Level 1B waveform power values around a given buffer of a given study location and calculates waveform metrics (LeW), and clusters the data by calendar week. Erroneous and problematic waveforms are removed. 
@@ -57,8 +56,6 @@ This repository contains the following paths: [Data](/Data/), [Environments](/En
 [Level 2 LRM Elevation Aggregation](/Scripts/level_2_lrm_elevation_aggregation.py) takes the Level 2 elevation data for a given location and merges them into one .csv file.
 
 [Level 2 Elevation Multiple Regression](/Scripts/elevation_multiple_regression.py) takes Level 2 retracked elevations around a given buffer around the study site and clusters them on a monthly basis, applying a linear regression to evaluate the elevation at the absolute study site.
-
-[Level 2 Elevation Change Detection](/Scripts/elevation_change_detection.py) takes the evaluated Level 2 elevations and applies the BEAST algorithm to it.
 
 [FTP_Extraction](/Scripts/ftp_server_extraction.py) downloads CryoSat-2 SIRAL data that fall within a predescribed date and bounding box.
 
