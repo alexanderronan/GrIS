@@ -1,5 +1,5 @@
 # GrIS
-Data Repository for "Impacts of Differing Melt Regimes on Satellite Radar Waveforms and Elevation Retrievals" Submission (Ronan et al. 2023).
+Data Repository for "Impacts of Differing Melt Regimes on Satellite Radar Waveforms and Elevation Retrievals" Submission (Ronan et al. 2024).
 
 Authors:
 Alexander C. Ronan<sup>1</sup>, Jonathan W. Chipman<sup>1,2</sup>, Robert L. Hawley<sup>1</sup>
