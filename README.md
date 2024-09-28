@@ -29,7 +29,7 @@ This repository contains the following paths: [Data](/Data/), [Environments](/En
 
 
 
-[Correlation Analysis](/Data/Correlation_Analysis/) contains the correlation coefficient analysis at Summit and Raven between LeW and Level 2 Elevations.
+[Correlation Analysis](/Data/Correlation_Analysis/) contains the correlation coefficient analysis at Summit, NEEM and Raven between LeW and Level 2 Elevations.
 
 [Graphs](/Data/Graphs/) Contains the relevant output graphs for each study location.
 
