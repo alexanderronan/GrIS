@@ -69,7 +69,7 @@ Non-BEAST algorithms & the plotting algorithm require the included [GIS](/Enviro
 
 Elevation 2: UCL Land-Ice Retracker; Elevation 3: OCOG Retracker
 
-Note: This data repository includes metrics (Trailing-Edge Slope,Riemann Sum Integral)  and locations (50km-NEEM, Similar-NEEM) not included in the study (Leading-Edge Width at Raven, Summit Station and NEEM.
+Note: This data repository includes metrics (Trailing-Edge Slope, Riemann Sum Integral)  and locations (50km-NEEM, Similar-NEEM) not included in the study (Leading-Edge Width at Raven, Summit Station and NEEM.
 
 --------------------------------------------------------------------------------------------------
 
